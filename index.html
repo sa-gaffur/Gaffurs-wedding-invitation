@@ -818,27 +818,33 @@ scratchCards.forEach((wrap, index) => {
     canvas.height = card.offsetHeight;
     drawGold();
   }
+function drawGold() {
+  const w = canvas.width;
+  const h = canvas.height;
 
-  function drawGold() {
-    
-    const w = canvas.width;
-    const h = canvas.height;
+  // ✅ grad defined FIRST before use
+  const grad = ctx.createLinearGradient(0,0,w,h);
+  grad.addColorStop(0,   '#b8860b');
+  grad.addColorStop(0.3, '#e8c97a');
+  grad.addColorStop(0.5, '#f5e1a0');
+  grad.addColorStop(0.7, '#e8c97a');
+  grad.addColorStop(1,   '#c9a84c');
 
-    ctx.fillStyle = grad;
-    ctx.fillRect(0,0,w,h);
+  ctx.fillStyle = grad;
+  ctx.fillRect(0,0,w,h);
 
-    ctx.fillStyle = 'rgba(255,220,100,0.4)';
+  ctx.fillStyle = 'rgba(255,220,100,0.4)';
+  for(let i=0;i<60;i++){
+    ctx.beginPath();
+    ctx.arc(Math.random()*w, Math.random()*h, Math.random()*3, 0, Math.PI*2);
+    ctx.fill();
+  }
 
-    const grad = ctx.createLinearGradient(0,0,w,h);
-    grad.addColorStop(0,   '#b8860b');
-    grad.addColorStop(0.3, '#e8c97a');
-    grad.addColorStop(0.5, '#f5e1a0');
-    grad.addColorStop(0.7, '#e8c97a');
-    grad.addColorStop(1,   '#c9a84c');
-
-    ctx.fillStyle = 'rgba(60,40,0,0.65)';
-    ctx.font = '500 11px Cinzel, serif';
-    ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(60,40,0,0.65)';
+  ctx.font = '500 11px Cinzel, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('✦  SCRATCH TO REVEAL  ✦', w/2, h/2 + 5);
+}
     /*
     
 
